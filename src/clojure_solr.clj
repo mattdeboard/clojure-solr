@@ -38,9 +38,11 @@
    (coll? p) (into-array String (map str p))
    :else (into-array String [(str p)])))
 
-(defn search [q & flags]
+(defn search [q flags]
+  "Perform a query using 'q' as the query term.
+'flags' is a {:field-name value}."
   (let [query (SolrQuery. q)]
-    (doseq [[key value] (partition 2 flags)]
+    (doseq [[key value] flags]
       (.setParam query (apply str (rest (str key))) (make-param value)))
     (map doc-to-hash (.getResults (.query *connection* query)))))
 
