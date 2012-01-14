@@ -12,7 +12,7 @@ project.clj file:
 
 ::
 
-    [clojure-solr "0.2.0-SNAPSHOT"]
+    [clojure-solr "0.4.0-SNAPSHOT"]
 
 To build from source, run:
 
