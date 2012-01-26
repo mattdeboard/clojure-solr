@@ -4,7 +4,7 @@
            (org.apache.solr.client.solrj SolrQuery)
            (org.apache.solr.common.params ModifiableSolrParams)))
 
-(declare *connection*)
+(declare ^:dynamic *connection*)
 
 (defn connect [url]
   (CommonsHttpSolrServer. url))
@@ -61,3 +61,4 @@
 (defmacro with-connection [conn & body]
   `(binding [*connection* ~conn]
      ~@body))
+
