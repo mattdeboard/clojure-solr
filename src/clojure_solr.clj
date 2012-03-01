@@ -13,7 +13,7 @@
   (let [sdoc (SolrInputDocument.)]
     (doseq [[key value] doc]
       (let [key (cond
-                 (keyword? key) (apply str (rest (str key)))
+                 (keyword? key) (name key)))
                  :default (str key))]
         (.addField sdoc key value)))
     sdoc))
@@ -41,7 +41,7 @@
 (defn search [q & flags]
   (let [query (SolrQuery. q)]
     (doseq [[key value] (partition 2 flags)]
-      (.setParam query (apply str (rest (str key))) (make-param value)))
+      (.setParam query (name key) (make-param value)))
     (map doc-to-hash (.getResults (.query *connection* query)))))
 
 (defn delete-id! [id]
